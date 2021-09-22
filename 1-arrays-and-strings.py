@@ -108,4 +108,32 @@ def rotate_matrix(m: Sequence[Sequence[int]]) -> Sequence[Sequence[int]]:
     
     return m
 
-print(rotate_matrix([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
+
+def zero_matrix(m: Sequence[Sequence[int]]) -> Sequence[Sequence[int]]:
+    i_flags = [False] * len(m)
+    j_flags = [False] * len(m[0])
+
+    for i in range(len(m)):
+        for j in range(len(m[0])):
+            i_flags[i] |= int(m[i][j] == 0)
+            j_flags[j] |= int(m[i][j] == 0)
+        
+    for i, f in enumerate(i_flags):
+        if f:
+            for j in range(len(m[0])):
+                m[i][j] = 0
+
+    for j, f in enumerate(j_flags):
+        if f:
+            for i in range(len(m)):
+                m[i][j] = 0
+
+    return m
+
+
+def is_rotation(s: str) -> bool:
+    pass
+
+
+print(zero_matrix([[1, 2, 3], [0, 5, 6], [7, 0, 9]]))
+
